@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "harubooru"
+version = "0.1.0"
+description = "Harubooru is a simple, API based imageboard server."
+authors = ["David Kurt <redfox@live.de>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+fastapi = "^0.75.0"
+uvicorn = {extras = ["standard"], version = "^0.17.6"}
+
+[tool.poetry.dev-dependencies]
+pylint = "^2.13.0"
+
+[tool.poetry.scripts]
+start = "harubooru.main:serve"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
