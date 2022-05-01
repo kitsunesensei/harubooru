@@ -2,6 +2,7 @@
 # Disable missing-module-docstring and missing-function-docstring.
 disable=C0114,C0115,C0116
 extension-pkg-whitelist=pydantic
+ignore-patterns=(.)*_test\.py,test_(.)*\.py
 
 [BASIC]
 # Minimum line length for functions/classes that require docstrings, shorter
