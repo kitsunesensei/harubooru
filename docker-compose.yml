@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  postgresql_dev:
+    image: postgres:11.4
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: harubooru_db
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
