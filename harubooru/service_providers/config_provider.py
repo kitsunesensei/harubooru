@@ -2,7 +2,7 @@ from enum import Enum
 from typing import Any, Dict, Literal, Tuple
 from pathlib import Path
 import yaml
-from pydantic import BaseModel, BaseSettings, SecretStr, AnyHttpUrl, FilePath, DirectoryPath, AnyUrl, IPvAnyAddress
+from pydantic import BaseModel, BaseSettings, SecretStr, AnyHttpUrl, FilePath, DirectoryPath
 from pydantic.env_settings import SettingsSourceCallable
 
 
@@ -29,7 +29,7 @@ class LogLevels(str, Enum):
 
 class MysqlConfig(BaseModel):
     driver: Literal['mysql']
-    host: AnyUrl | IPvAnyAddress
+    host: str
     username: str
     password: SecretStr
     database: str
@@ -38,7 +38,7 @@ class MysqlConfig(BaseModel):
 
 class PostgresqlConfig(BaseModel):
     driver: Literal['postgresql']
-    host: AnyUrl | IPvAnyAddress
+    host: str
     username: str
     password: SecretStr
     database: str
