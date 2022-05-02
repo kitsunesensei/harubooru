@@ -7,6 +7,7 @@ from pydantic.env_settings import SettingsSourceCallable
 
 
 def parse_yml(config_object: BaseSettings) -> Dict[str, Any]:
+    # TODO config path from arguments
     with open(Path('config.yml'), 'r', encoding=config_object.__config__.env_file_encoding) as stream:
         return yaml.safe_load(stream)
 
