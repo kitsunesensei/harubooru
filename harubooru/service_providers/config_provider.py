@@ -45,8 +45,8 @@ class PostgresqlConfig(BaseModel):
     port: int = 5432
 
 
-class SqlLiteConfig(BaseModel):
-    driver: Literal['sqllite']
+class SqliteConfig(BaseModel):
+    driver: Literal['sqlite']
     file_path: Path
 
 
@@ -75,7 +75,7 @@ class ApplicationConfig(BaseSettings):
     app_environment: AppEnvironments = AppEnvironments.PRODUCTION
     log_level: LogLevels | Tuple[LogLevels] = LogLevels.CRITICAL
 
-    database: MysqlConfig | PostgresqlConfig | SqlLiteConfig
+    database: MysqlConfig | PostgresqlConfig | SqliteConfig
     storage: Dict[str, LocalStorageConfig | WebdavStorageConfig]
 
     class Config:  # pylint: disable=too-few-public-methods

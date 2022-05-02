@@ -1,10 +1,10 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from harubooru.service_providers.config_provider import application_config as config, PostgresqlConfig, MysqlConfig, \
-    SqlLiteConfig, LogLevels
+    SqliteConfig, LogLevels
 
 
-def make_connection_url(db_config: PostgresqlConfig | MysqlConfig | SqlLiteConfig) -> str:
+def make_connection_url(db_config: PostgresqlConfig | MysqlConfig | SqliteConfig) -> str:
     if isinstance(db_config, PostgresqlConfig):
         return f'postgresql+psycopg2://{db_config.username}:{db_config.password.get_secret_value()}' \
                f'@{db_config.host}:{db_config.port}/{db_config.database}'
@@ -13,7 +13,7 @@ def make_connection_url(db_config: PostgresqlConfig | MysqlConfig | SqlLiteConfi
         return f'mysql://{db_config.username}:{db_config.password.get_secret_value()}' \
                f'@{db_config.host}:{db_config.port}/{db_config.database}'
 
-    if isinstance(db_config, SqlLiteConfig):
+    if isinstance(db_config, SqliteConfig):
         return f'sqlite:///{db_config.file_path}'
 
     raise TypeError('Unknown Database Driver.')
