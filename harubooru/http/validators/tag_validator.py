@@ -11,14 +11,14 @@ class TagIn(BaseModel):
     auto_deny_files: bool = False
 
     @root_validator
-    def tag_must_have_content(cls, values):
+    def tag_must_have_content(cls, values):  # pylint: disable=no-self-argument,no-self-use
         tag_en, tag_jp = values.get('tag_en'), values.get('tag_jp')
         if not (tag_en or tag_jp):
             raise ValueError('Tag must have content.')
         return values
 
     @root_validator
-    def auto_values(cls, values):
+    def auto_values(cls, values):  # pylint: disable=no-self-argument,no-self-use
         auto_approve_files, auto_deny_files = values.get('auto_approve_files'), values.get('auto_deny_files')
         if auto_approve_files is True and auto_deny_files is True:
             raise ValueError('Auto approve and deny must not be activated together.')

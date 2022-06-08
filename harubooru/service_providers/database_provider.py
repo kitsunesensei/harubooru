@@ -1,7 +1,10 @@
+from fastapi import Depends
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
-from harubooru.service_providers.config_provider import application_config as config, PostgresqlConfig, MysqlConfig, \
+from harubooru.service_providers.config_provider import application_config, PostgresqlConfig, MysqlConfig, \
     SqliteConfig, LogLevels
+
+BaseModel = declarative_base()
 
 
 def make_connection_url(db_config: PostgresqlConfig | MysqlConfig | SqliteConfig) -> str:
@@ -19,10 +22,19 @@ def make_connection_url(db_config: PostgresqlConfig | MysqlConfig | SqliteConfig
     raise TypeError('Unknown Database Driver.')
 
 
-engine = create_engine(make_connection_url(config.database), echo=config.log_level is LogLevels.DEBUG)
+def init(
+    db_config: PostgresqlConfig | MysqlConfig | SqliteConfig,
+    print_output: bool = application_config.log_level is LogLevels.DEBUG
+):
+    engine = create_engine(make_connection_url(db_config), echo=print_output)
+    Session = sessionmaker(bind=engine, autocommit=False, autoflush=False)  # pylint: disable=invalid-name
+    BaseModel.metadata.create_all(bind=engine)
+    return Session
 
-database_session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
-BaseModel = declarative_base()
+SessionMaker = init(application_config.database, application_config.log_level)
 
-BaseModel.metadata.create_all(bind=engine)
+
+def get_session(session_maker: SessionMaker = Depends()):
+    with session_maker() as session:
+        yield session

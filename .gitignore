@@ -1,5 +1,6 @@
 # Project specific
 config.yml
+*.sqlite
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

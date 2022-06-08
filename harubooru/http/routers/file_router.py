@@ -18,7 +18,6 @@ async def get_file(file_id: str):
     return ""
 
 
-#@router.post("/")
 @router.post("/", response_model=FileOut)
 async def create_file(file: UploadFile):
     file_hash = await create_sha256_hash(file)
@@ -48,4 +47,3 @@ async def create_file_meta(file_id: str, file: FileMetaIn = Body(...)):
 @router.delete("/{file_id}", status_code=204)
 async def delete_file(file_id: str):
     return ""
-

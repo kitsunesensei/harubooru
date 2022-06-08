@@ -29,7 +29,7 @@ class LogLevels(str, Enum):
 
 
 class MysqlConfig(BaseModel):
-    driver: Literal['mysql']
+    driver: Literal['mysql'] = 'mysql'
     host: str
     username: str
     password: SecretStr
@@ -38,7 +38,7 @@ class MysqlConfig(BaseModel):
 
 
 class PostgresqlConfig(BaseModel):
-    driver: Literal['postgresql']
+    driver: Literal['postgresql'] = 'postgresql'
     host: str
     username: str
     password: SecretStr
@@ -47,17 +47,17 @@ class PostgresqlConfig(BaseModel):
 
 
 class SqliteConfig(BaseModel):
-    driver: Literal['sqlite']
+    driver: Literal['sqlite'] = 'sqlite'
     file_path: Path
 
 
 class LocalStorageConfig(BaseModel):
-    driver: Literal['local']
+    driver: Literal['local'] = 'local'
     base_path: DirectoryPath
 
 
 class WebdavStorageConfig(BaseModel):
-    driver: Literal['webdav']
+    driver: Literal['webdav'] = 'webdav'
     url: AnyHttpUrl
     username: str
     password: SecretStr

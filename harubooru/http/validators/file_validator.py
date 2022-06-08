@@ -1,11 +1,10 @@
 from typing import List
 from datetime import datetime
-from pydantic import UUID4, HttpUrl
+from pydantic import UUID4, HttpUrl, PositiveInt
 from harubooru.http.validators.base import BaseModel
 from harubooru.http.validators.tag_validator import TagIn, TagOut
-from harubooru.models.file import File, TriageStates
+from harubooru.models.file import TriageStates
 from harubooru.models.source import SourceTypes
-from harubooru.lib.media_types import get_media_type_by_mime, MediaType
 
 
 class FileSourceIn(BaseModel):
@@ -28,8 +27,8 @@ class FileSourceOut(FileSourceIn):
 class FileOut(BaseModel):
     id: UUID4
     media_url: HttpUrl
-    media_width: int
-    media_height: int
+    media_width: PositiveInt
+    media_height: PositiveInt
     file_extension: str
     file_mime_type: str
     file_hash: str

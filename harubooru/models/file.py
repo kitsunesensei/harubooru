@@ -1,7 +1,6 @@
 from enum import Enum
 from hashlib import sha256
 from uuid import uuid4
-
 from fastapi import UploadFile
 from sqlalchemy import Column, CheckConstraint, String, Integer, DateTime, Enum as DbEnum
 from sqlalchemy.orm import relationship
