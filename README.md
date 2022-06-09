@@ -17,5 +17,5 @@ For production use, add `--no-dev` to omit development dependencies.
 Run local development server inside poetry virtual environment:
 
 ```shell
-poetry run uvicorn main:app --app-dir src --reload
+poetry run uvicorn main:app --app-dir harubooru --reload
 ```
