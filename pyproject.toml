@@ -12,6 +12,11 @@ uvicorn = {extras = ["standard"], version = "^0.17.6"}
 
 [tool.poetry.dev-dependencies]
 pylint = "^2.13.0"
+pytest = "^7.1.2"
+Faker = "^13.12.1"
+pytest-cov = "^3.0.0"
+pytest-env = "^0.6.2"
+hypothesis = "^6.47.0"
 
 [tool.poetry.scripts]
 start = "harubooru.main:serve"
